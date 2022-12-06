@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Back End</title>
+    <link rel="stylesheet" href="../css/index.css" />
+  </head>
+  <body>
+    <div class="header">
+      <h1 class="heading">VACCINE SLOT BOOKING</h1>
+    </div>
+    <form id="form">
+    <div class="form">
+        <div class="textImage">
+            <div class="image">
+                <img src="https://www.kcmo.gov/home/showpublishedimage/8147/637916711429370000" alt="">
+            </div>
+            <div class="textDisplay">
+                <h5 class="text">Protect Youself</h5>
+                <h5 class="text">Protect Your Community</h5>
+                <h5 class="text1">Get Vaccinated</h5>
+            </div>
+            
+        </div>
+        
+        <div class="content">
+          <div class="row">
+            <div class="column1">
+              <div class="row1">
+                <p class="title">Name</p>
+              </div>
+              <div class="row2">
+                <input type="text" name="name" id="" class="inputTag" />
+              </div>
+              <div class="row3">
+                <p></p>
+              </div>
+            </div>
+            <div class="column2">
+                <div class="row1">
+                  <p class="title">Age</p>
+                </div>
+                <div class="row2">
+                  <input type="text" name="age" id="" class="inputTag" />
+                </div>
+                <div class="row3">
+                  <p></p>
+                </div>
+              </div>
+          </div>
+
+          <div class="row">
+            <div class="column1">
+              <div class="row1">
+                <p class="title">Email</p>
+              </div>
+              <div class="row2">
+                <input type="email" name="gmail" id="" class="inputTag" />
+              </div>
+              <div class="row3">
+                <p></p>
+              </div>
+            </div>
+            <div class="column2">
+              <div class="row1">
+                <p class="title">Mobile No.</p>
+              </div>
+              <div class="row2">
+                <input type="text" name="mobile" id="" class="inputTag" />
+              </div>
+              <div class="row3">
+                <p></p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column1">
+                <div class="row1">
+                  <p class="title">Aadhar No.</p>
+                </div>
+                <div class="row2">
+                  <input type="text" name="adhaar_no" id="" class="inputTag" placeholder="xxxx - xxxx - xxxx"/>
+                </div>
+                <div class="row3">
+                  <p></p>
+                </div>
+              </div>
+            
+            <div class="column2">
+              <div class="row1">
+                <p class="title">Gender</p>
+              </div>
+              <div class="row2">
+                <select name="gender" id="" class="selectTag" >
+                    <option value="">Select</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="others">Others</option>
+                </select>
+              </div>
+              <div class="row3">
+                <p></p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column1">
+              <div class="row1">
+                <p class="title">Date</p>
+              </div>
+              <div class="row2">
+                <input type="date" name="date" id="" class="inputTag" />
+              </div>
+              <div class="row3">
+                <p></p>
+              </div>
+            </div>
+            <div class="column2">
+              <div class="row1">
+                <p class="title">Time</p>
+              </div>
+              <div class="row2">
+                <select name="time" id="" class="selectTag" >
+                    <option value="">Select</option>
+                    <option value="section1">8:00 to 10:00</option>
+                    <option value="section2">10:00 to 12:00</option>
+                    <option value="section3">12:00 to 2:00</option>
+                    <option value="section4">3:00 to 5:00</option>
+                </select>
+              </div>
+              <div class="row3">
+                <p></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="textarearow">
+            <div class="column1">
+              <div class="row1">
+                <p class="title">Your Address</p>
+              </div>
+              <div class="row2">
+                <textarea
+                  name="address"
+                  id=""
+                  cols="52"
+                  rows="4"
+                  class="textareaTag"
+                ></textarea>
+              </div>
+              <div class="row3">
+                <p></p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column1">
+                <button class="submitBtn">Submit</button>
+            </div>
+
+          </div>
+        </div>
+    </div>
+    </form>
+    <script>
+        document.getElementById('form').addEventListener('submit',(event) => {
+            event.preventDefault();
+            const {target} = event;
+            const {name,age,gmail,mobile,adhaar_no,gender,date,time,address} = target; 
+            // const {name,age,gmail,mobile,adhaar_no,gender,date,time,address} = { ...target } = event; 
+            
+
+            let user = {
+                name : name.value,
+                age : age.value,
+                gmail : gmail.value,
+                mobile : mobile.value,
+                adhaar_no : adhaar_no.value,
+                date : date.value,
+                time : time.value,
+                address : address.value
+            }
+            fetch('/user',{
+                method : "POST",
+                body : JSON.stringify(user)
+            }).then(res => res.json()).then(data => {
+                // alert(data);
+                console.log(data.msg)
+            })
+            .catch((err) => console.log(err));
+            
+        },false);
+    </script>
+  </body>
+</html>
